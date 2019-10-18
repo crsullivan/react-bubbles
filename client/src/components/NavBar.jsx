@@ -8,10 +8,10 @@ const NavBar = () => {
     }
 
     return (
-        <div>
+        <div className='nav'>
             <h1>Bubble Sprint</h1>
             <NavLink to='/'>
-                    <button onClick={logout}>Log Out</button>
+                    <button className='logout' onClick={logout}>Log Out</button>
             </NavLink>
         </div>
     )

@@ -9,12 +9,15 @@ import "./styles.scss";
 
 function App() {
   return (
-    <Router>
-        <Switch>
-          <Route exact path="/" component={Login} />
-          <PrivateRoute path="/bubble-page" component={BubblePage} />
-        </Switch>
-    </Router>
+    <div>
+      <Router>
+        <NavBar />
+          <Switch>
+            <Route exact path="/" component={Login} />
+            <PrivateRoute path="/bubble-page" component={BubblePage} />
+          </Switch>
+      </Router>
+    </div>
   );
 }
 
