@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { axiosWithLoginAuth } from "./utils/axiosWithLoginAuth";
 
 const initialColor = {
-  color: "",
-  code: { hex: "" }
+    id: Date.now(),
+    color: "",
+    code: { hex: "" }
 };
 
 const ColorList = ({ colors, updateColors }) => {
@@ -21,7 +23,19 @@ const ColorList = ({ colors, updateColors }) => {
     // Make a put request to save your updated color
     // think about where will you get the id from...
     // where is is saved right now?
-  };
+    axiosWithLoginAuth()
+    .put(`/api/colors/${colorToEdit.id}`, colorToEdit)
+          .then(result => {
+              // const newColors=colors.map(movie => (
+              //   `${colors.id}` === colors.match.params.id
+              // ))
+              console.log(result)
+              setColorToEdit(colorToEdit);
+              window.location.reload();
+          })
+          .catch(error => console.log(error.response));
+      };
+  
 
   const deleteColor = color => {
     // make a delete request to delete this color
@@ -56,6 +70,7 @@ const ColorList = ({ colors, updateColors }) => {
                 setColorToEdit({ ...colorToEdit, color: e.target.value })
               }
               value={colorToEdit.color}
+              name='color'
             />
           </label>
           <label>
@@ -68,6 +83,7 @@ const ColorList = ({ colors, updateColors }) => {
                 })
               }
               value={colorToEdit.code.hex}
+              name='code'
             />
           </label>
           <div className="button-row">
